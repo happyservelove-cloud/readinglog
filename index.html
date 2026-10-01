@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Reading Log Journal</title>
+  <title>Reading Log Journal with AI English Teacher</title>
 
   <style>
     /* 전체 요소의 크기 계산 방식을 통일합니다. */
@@ -23,7 +23,7 @@
     /* 전체 내용을 가운데 정렬하고 최대 폭을 제한합니다. */
     .container {
       width: 100%;
-      max-width: 860px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 32px 20px;
     }
@@ -156,7 +156,7 @@
 
     .progress-fill {
       height: 100%;
-      width: 20%;
+      width: 25%;
       background: linear-gradient(90deg, #2563eb, #60a5fa);
       transition: width 0.3s ease;
     }
@@ -167,6 +167,7 @@
       justify-content: space-between;
       gap: 12px;
       margin-top: 24px;
+      flex-wrap: wrap;
     }
 
     button {
@@ -190,10 +191,15 @@
       margin-left: auto;
     }
 
+    .btn-ai {
+      background: #9333ea;
+      color: white;
+      margin-left: auto;
+    }
+
     .btn-submit {
       background: #16a34a;
       color: white;
-      margin-left: auto;
     }
 
     .btn-copy {
@@ -238,6 +244,55 @@
       margin-top: 16px;
     }
 
+    /* AI 교정 안내 박스입니다. */
+    .ai-box {
+      background: #faf5ff;
+      border-left: 5px solid #9333ea;
+      padding: 16px;
+      border-radius: 14px;
+      color: #374151;
+      line-height: 1.7;
+      margin-top: 18px;
+    }
+
+    /* AI 교정 결과 카드입니다. */
+    .feedback-card {
+      background: #ffffff;
+      border: 1px solid #e9d5ff;
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .feedback-card h3 {
+      margin-top: 0;
+      color: #6b21a8;
+      font-size: 18px;
+    }
+
+    .feedback-label {
+      font-weight: 800;
+      color: #374151;
+      margin-top: 12px;
+      margin-bottom: 6px;
+    }
+
+    .feedback-text {
+      background: #f9fafb;
+      border-radius: 12px;
+      padding: 12px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    .suggestion-text {
+      background: #f5f3ff;
+      border-radius: 12px;
+      padding: 12px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
     .small-note {
       font-size: 13px;
       color: #6b7280;
@@ -266,6 +321,11 @@
       button {
         width: 100%;
       }
+
+      .btn-next,
+      .btn-ai {
+        margin-left: 0;
+      }
     }
   </style>
 </head>
@@ -276,16 +336,16 @@
     <div class="header">
       <h1>📚 Reading Log Journal</h1>
       <p>
-        Connect one sentence from your reading to your feelings and thoughts.<br />
-        책 속 한 문장을 나의 감정과 생각에 연결해 보는 독서 기록장
+        Read, reflect, and improve your English with an AI English Teacher.<br />
+        책 속 문장을 나의 감정과 연결하고, 영어 표현을 더 자연스럽게 다듬어 보세요.
       </p>
     </div>
 
     <!-- 진행률 표시 영역 -->
     <div class="progress-box">
       <div class="progress-text">
-        <span id="stepText">Step 1 / 5</span>
-        <span id="stepPercent">20%</span>
+        <span id="stepText">Step 1 / 4</span>
+        <span id="stepPercent">25%</span>
       </div>
       <div class="progress-bar">
         <div class="progress-fill" id="progressFill"></div>
@@ -389,13 +449,13 @@
       </div>
     </section>
 
-    <!-- Step 4: 오늘의 감정과 연결하기 -->
+    <!-- Step 4: 오늘의 감정과 연결하기 + AI 교정 -->
     <section class="card step hidden" id="step4">
       <span class="step-label">Step 4</span>
-      <h2>Connect It to Yourself / 나와 연결하기</h2>
+      <h2>Connect It to Yourself & Get Feedback / 나와 연결하고 표현 다듬기</h2>
       <p class="description">
-        Connect the sentence to your feelings, experiences, or thoughts today.<br />
-        책 속 문장을 오늘 나의 기분, 경험, 생각과 연결해 보세요.
+        Connect the sentence to your feelings, experiences, or thoughts today. Then get help from the AI English Teacher.<br />
+        책 속 문장을 오늘 나의 기분, 경험, 생각과 연결한 뒤 AI 영어교사의 표현 제안을 받아 보세요.
       </p>
 
       <label for="mood">
@@ -426,30 +486,51 @@
       </label>
       <textarea id="impact" placeholder="Write about a change in your thoughts, comfort, realization, or decision. / 생각의 변화, 위로, 깨달음, 다짐 등을 적어 보세요."></textarea>
 
-      <div class="buttons">
-        <button class="btn-prev" onclick="prevStep()">Previous / 이전으로</button>
-        <button class="btn-next" onclick="nextStep()">Next / 다음으로</button>
+      <div class="ai-box">
+        🤖 <strong>AI English Teacher</strong><br />
+        Click the button below to receive simple English expression suggestions.<br />
+        아래 버튼을 누르면 학생이 쓴 영어 표현을 더 자연스럽게 다듬은 제안문을 볼 수 있습니다.<br />
+        <span class="small-note">
+          ※ This version works without an external API, so it checks common expression patterns, capitalization, punctuation, and simple grammar.<br />
+          ※ 외부 AI API 없이 작동하는 버전이라 대소문자, 문장부호, 자주 틀리는 표현, 간단한 문법을 중심으로 도와줍니다.
+        </span>
       </div>
-    </section>
-
-    <!-- Step 5: 마지막 성찰 입력 -->
-    <section class="card step hidden" id="step5">
-      <span class="step-label">Step 5</span>
-      <h2>Final Reflection / 최종 성찰</h2>
-      <p class="description">
-        Complete your Reading Log by writing your final thought or promise.<br />
-        마지막 생각이나 다짐을 쓰며 Reading Log를 완성해 보세요.
-      </p>
-
-      <label for="finalThought">
-        <span class="eng">What is your final thought or promise after reading this sentence?</span><br />
-        <span class="kor">이 문장을 읽고 난 뒤의 마지막 생각이나 다짐은 무엇인가요?</span>
-      </label>
-      <textarea id="finalThought" placeholder="Write what you want to remember or do from now on. / 앞으로 기억하고 싶은 점이나 실천하고 싶은 점을 적어 보세요."></textarea>
 
       <div class="buttons">
         <button class="btn-prev" onclick="prevStep()">Previous / 이전으로</button>
+        <button class="btn-ai" onclick="checkWithTeacher()">AI Teacher Check / 표현 교정 받기</button>
         <button class="btn-submit" onclick="makeFinalLog()">Complete Reading Log / 완성하기</button>
+      </div>
+
+      <!-- AI 교정 결과가 표시되는 영역입니다. -->
+      <div id="teacherFeedback" class="hidden">
+        <div class="feedback-card">
+          <h3>🤖 AI English Teacher Feedback</h3>
+          <p class="description">
+            Review the suggestions below. You may use the teacher's version if it matches your meaning.<br />
+            아래 제안문을 확인하고, 내 생각과 맞으면 교정된 표현을 사용해 보세요.
+          </p>
+
+          <div class="feedback-label">1. Impressive Sentence / 인상 깊은 문장</div>
+          <div class="feedback-text" id="originalSentence"></div>
+          <div class="feedback-label">Suggested Version / 제안문</div>
+          <div class="suggestion-text" id="suggestedSentence"></div>
+
+          <div class="feedback-label">2. Reason / 이유</div>
+          <div class="feedback-text" id="originalReason"></div>
+          <div class="feedback-label">Suggested Version / 제안문</div>
+          <div class="suggestion-text" id="suggestedReason"></div>
+
+          <div class="feedback-label">3. Feeling Connection / 기분과의 연결</div>
+          <div class="feedback-text" id="originalMoodConnection"></div>
+          <div class="feedback-label">Suggested Version / 제안문</div>
+          <div class="suggestion-text" id="suggestedMoodConnection"></div>
+
+          <div class="feedback-label">4. Impact / 영향</div>
+          <div class="feedback-text" id="originalImpact"></div>
+          <div class="feedback-label">Suggested Version / 제안문</div>
+          <div class="suggestion-text" id="suggestedImpact"></div>
+        </div>
       </div>
     </section>
 
@@ -483,8 +564,16 @@
     // 현재 사용자가 보고 있는 단계 번호입니다.
     let currentStep = 1;
 
-    // 전체 단계 수입니다.
-    const totalSteps = 5;
+    // 전체 단계 수입니다. 마지막 성찰 단계를 삭제했기 때문에 4단계입니다.
+    const totalSteps = 4;
+
+    // AI 교정 결과를 저장하는 객체입니다.
+    let teacherSuggestions = {
+      sentence: "",
+      reason: "",
+      moodConnection: "",
+      impact: ""
+    };
 
     // 페이지가 처음 열릴 때 실행됩니다.
     window.onload = function () {
@@ -580,14 +669,177 @@
       return true;
     }
 
+    // AI 영어교사 버튼을 눌렀을 때 실행되는 함수입니다.
+    function checkWithTeacher() {
+      // Step 4의 필수 항목이 비어 있으면 교정을 진행하지 않습니다.
+      if (!validateStep(4)) {
+        return;
+      }
+
+      // 학생이 입력한 문장을 가져옵니다.
+      const impressiveSentence = document.getElementById("impressiveSentence").value.trim();
+      const reason = document.getElementById("reason").value.trim();
+      const moodConnection = document.getElementById("moodConnection").value.trim();
+      const impact = document.getElementById("impact").value.trim();
+
+      // 각 항목에 대해 교정 제안문을 만듭니다.
+      teacherSuggestions.sentence = polishEnglish(impressiveSentence, true);
+      teacherSuggestions.reason = polishEnglish(reason, false);
+      teacherSuggestions.moodConnection = polishEnglish(moodConnection, false);
+      teacherSuggestions.impact = polishEnglish(impact, false);
+
+      // 원문과 제안문을 화면에 표시합니다.
+      document.getElementById("originalSentence").innerText = impressiveSentence;
+      document.getElementById("suggestedSentence").innerText = teacherSuggestions.sentence;
+
+      document.getElementById("originalReason").innerText = reason;
+      document.getElementById("suggestedReason").innerText = teacherSuggestions.reason;
+
+      document.getElementById("originalMoodConnection").innerText = moodConnection;
+      document.getElementById("suggestedMoodConnection").innerText = teacherSuggestions.moodConnection;
+
+      document.getElementById("originalImpact").innerText = impact;
+      document.getElementById("suggestedImpact").innerText = teacherSuggestions.impact;
+
+      // 숨겨져 있던 피드백 영역을 보여줍니다.
+      document.getElementById("teacherFeedback").classList.remove("hidden");
+
+      alert("AI English Teacher feedback is ready. / AI 영어교사의 표현 제안이 준비되었습니다.");
+    }
+
+    // 영어 문장을 간단히 다듬어 주는 함수입니다.
+    // 외부 API 없이 브라우저 안에서만 작동하는 규칙 기반 교정 도우미입니다.
+    function polishEnglish(text, isQuotedSentence) {
+      if (!text) {
+        return "";
+      }
+
+      let polished = text;
+
+      // 줄바꿈 주변의 불필요한 공백을 정리합니다.
+      polished = polished.replace(/[ \t]+/g, " ");
+      polished = polished.replace(/\n\s+/g, "\n");
+      polished = polished.trim();
+
+      // 자주 틀리는 축약형과 기본 표현을 교정합니다.
+      const replacements = [
+        [/\bi\b/g, "I"],
+        [/\bim\b/gi, "I'm"],
+        [/\bi'm\b/g, "I'm"],
+        [/\bdont\b/gi, "don't"],
+        [/\bdoesnt\b/gi, "doesn't"],
+        [/\bdidnt\b/gi, "didn't"],
+        [/\bcant\b/gi, "can't"],
+        [/\bcannot\b/gi, "can't"],
+        [/\bwont\b/gi, "won't"],
+        [/\bisnt\b/gi, "isn't"],
+        [/\baren't\b/g, "aren't"],
+        [/\baren t\b/gi, "aren't"],
+        [/\bwasnt\b/gi, "wasn't"],
+        [/\bwerent\b/gi, "weren't"],
+        [/\bthats\b/gi, "that's"],
+        [/\bits\b/gi, "it's"],
+        [/\bI am agree\b/gi, "I agree"],
+        [/\bI was impress\b/gi, "I was impressed"],
+        [/\bI am impress\b/gi, "I am impressed"],
+        [/\bvery impress\b/gi, "very impressive"],
+        [/\bmore better\b/gi, "better"],
+        [/\bIt make me\b/gi, "It makes me"],
+        [/\bThis sentence make me\b/gi, "This sentence makes me"],
+        [/\bThis sentence give me\b/gi, "This sentence gives me"],
+        [/\bIt give me\b/gi, "It gives me"],
+        [/\bI feel comfort\b/gi, "I feel comforted"],
+        [/\bI feel happy because this sentence\b/gi, "I feel happy because this sentence"],
+        [/\bIn my think\b/gi, "I think"],
+        [/\bmy think\b/gi, "my thought"],
+        [/\bI thinked\b/gi, "I thought"],
+        [/\bpeoples\b/gi, "people"],
+        [/\ba lots of\b/gi, "a lot of"],
+        [/\bfor me, this sentence is meaning\b/gi, "To me, this sentence means"],
+        [/\bThis sentence is meaning\b/gi, "This sentence means"]
+      ];
+
+      // 위에 정의한 표현들을 차례대로 적용합니다.
+      replacements.forEach(function (item) {
+        polished = polished.replace(item[0], item[1]);
+      });
+
+      // 문장 시작 부분의 첫 글자를 대문자로 바꿉니다.
+      polished = capitalizeSentences(polished);
+
+      // 문장 끝에 마침표, 물음표, 느낌표가 없으면 마침표를 붙입니다.
+      polished = addFinalPunctuation(polished);
+
+      // 직접 인용문일 가능성이 있는 항목에는 안내 문구를 덧붙입니다.
+      if (isQuotedSentence) {
+        polished =
+          polished +
+          "\n\nTeacher's note: If this sentence is copied directly from the book, keep the original wording exactly as it appears in the book.";
+      }
+
+      return polished;
+    }
+
+    // 각 문장의 첫 글자를 대문자로 바꾸는 함수입니다.
+    function capitalizeSentences(text) {
+      // 줄바꿈을 유지하기 위해 문단별로 처리합니다.
+      const paragraphs = text.split("\n");
+
+      const fixedParagraphs = paragraphs.map(function (paragraph) {
+        let result = paragraph.trim();
+
+        if (!result) {
+          return result;
+        }
+
+        // 전체 문단의 첫 글자를 대문자로 만듭니다.
+        result = result.charAt(0).toUpperCase() + result.slice(1);
+
+        // 마침표, 물음표, 느낌표 뒤에 오는 첫 글자를 대문자로 만듭니다.
+        result = result.replace(/([.!?]\s+)([a-z])/g, function (match, punctuation, letter) {
+          return punctuation + letter.toUpperCase();
+        });
+
+        return result;
+      });
+
+      return fixedParagraphs.join("\n");
+    }
+
+    // 문장 끝에 기본 문장부호를 추가하는 함수입니다.
+    function addFinalPunctuation(text) {
+      const paragraphs = text.split("\n");
+
+      const fixedParagraphs = paragraphs.map(function (paragraph) {
+        let result = paragraph.trim();
+
+        if (!result) {
+          return result;
+        }
+
+        const lastChar = result.charAt(result.length - 1);
+
+        // 문장 끝이 마침표, 물음표, 느낌표, 따옴표 등으로 끝나지 않으면 마침표를 추가합니다.
+        if (![".", "?", "!", "\"", "'", "”", "’"].includes(lastChar)) {
+          result += ".";
+        }
+
+        return result;
+      });
+
+      return fixedParagraphs.join("\n");
+    }
+
     // 최종 Reading Log를 만드는 함수입니다.
     function makeFinalLog() {
-      const finalThought = document.getElementById("finalThought").value.trim();
-
-      // 마지막 생각 또는 다짐이 비어 있으면 결과를 만들지 않습니다.
-      if (!finalThought) {
-        alert("Please write your final thought or promise. / 마지막 생각 또는 다짐을 입력해 주세요.");
+      // Step 4의 필수 항목이 비어 있으면 결과를 만들지 않습니다.
+      if (!validateStep(4)) {
         return;
+      }
+
+      // AI 교정을 아직 하지 않았다면 자동으로 한 번 실행합니다.
+      if (!teacherSuggestions.reason || !teacherSuggestions.moodConnection || !teacherSuggestions.impact) {
+        checkWithTeacher();
       }
 
       // 사용자가 입력한 값을 가져옵니다.
@@ -604,9 +856,8 @@
       const impact = document.getElementById("impact").value.trim();
 
       // 최종 제출용 텍스트를 만듭니다.
-      // 자동 문장 틀을 제공하지 않고, 학생이 쓴 내용을 항목별로 정리합니다.
       const finalLog =
-`[Reading Log Journal]
+`[Reading Log Journal with AI English Teacher]
 
 1. Basic Information / 기본 정보
 - Student ID / 학번: ${studentId}
@@ -619,24 +870,40 @@
 - Pages or Chapter You Read / 읽은 범위: ${readingRange || "Not entered / 미입력"}
 
 3. Impressive Sentence / 인상 깊은 문장
+
+[Student's Original Version / 학생 원문]
 ${impressiveSentence}
 
+[AI English Teacher's Suggested Version / AI 영어교사 제안문]
+${teacherSuggestions.sentence}
+
 4. Reason / 이유
+
+[Student's Original Version / 학생 원문]
 ${reason}
+
+[AI English Teacher's Suggested Version / AI 영어교사 제안문]
+${teacherSuggestions.reason}
 
 5. Feeling Connection / 오늘의 기분과 문장의 연결
 - Today's Feeling / 오늘의 기분: ${mood}
 
+[Student's Original Version / 학생 원문]
 ${moodConnection}
 
+[AI English Teacher's Suggested Version / AI 영어교사 제안문]
+${teacherSuggestions.moodConnection}
+
 6. Impact / 이 문장이 나에게 준 영향
+
+[Student's Original Version / 학생 원문]
 ${impact}
 
-7. Final Thought or Promise / 마지막 생각 또는 다짐
-${finalThought}`;
+[AI English Teacher's Suggested Version / AI 영어교사 제안문]
+${teacherSuggestions.impact}`;
 
       // 작성 단계 화면을 숨기고 최종 결과 화면을 보여 줍니다.
-      document.getElementById("step5").classList.add("hidden");
+      document.getElementById("step4").classList.add("hidden");
       document.querySelector(".progress-box").classList.add("hidden");
       document.getElementById("resultSection").classList.remove("hidden");
 
