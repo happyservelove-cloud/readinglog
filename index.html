@@ -88,13 +88,11 @@
       line-height: 1.5;
     }
 
-    /* 영어 문구를 조금 더 강조합니다. */
     .eng {
       color: #111827;
       font-weight: 800;
     }
 
-    /* 한국어 문구는 보조 설명처럼 보이게 합니다. */
     .kor {
       color: #4b5563;
       font-weight: 600;
@@ -126,14 +124,12 @@
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
     }
 
-    /* 학번과 이름을 가로로 배치합니다. */
     .row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
 
-    /* 진행률 영역입니다. */
     .progress-box {
       margin-bottom: 18px;
     }
@@ -161,7 +157,6 @@
       transition: width 0.3s ease;
     }
 
-    /* 버튼 영역입니다. */
     .buttons {
       display: flex;
       justify-content: space-between;
@@ -194,7 +189,6 @@
     .btn-ai {
       background: #9333ea;
       color: white;
-      margin-left: auto;
     }
 
     .btn-submit {
@@ -217,23 +211,10 @@
       color: white;
     }
 
-    /* 숨겨야 할 단계에 적용합니다. */
     .hidden {
       display: none;
     }
 
-    /* 최종 결과 출력 영역입니다. */
-    .final-output {
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
-      border-radius: 18px;
-      padding: 20px;
-      white-space: pre-wrap;
-      line-height: 1.8;
-      font-size: 15px;
-    }
-
-    /* 학생에게 주는 작성 팁입니다. */
     .tip {
       background: #eff6ff;
       border-left: 5px solid #2563eb;
@@ -244,7 +225,6 @@
       margin-top: 16px;
     }
 
-    /* AI 교정 안내 박스입니다. */
     .ai-box {
       background: #faf5ff;
       border-left: 5px solid #9333ea;
@@ -255,13 +235,12 @@
       margin-top: 18px;
     }
 
-    /* AI 교정 결과 카드입니다. */
     .feedback-card {
       background: #ffffff;
       border: 1px solid #e9d5ff;
       border-radius: 16px;
       padding: 16px;
-      margin-top: 14px;
+      margin-top: 18px;
     }
 
     .feedback-card h3 {
@@ -273,7 +252,7 @@
     .feedback-label {
       font-weight: 800;
       color: #374151;
-      margin-top: 12px;
+      margin-top: 14px;
       margin-bottom: 6px;
     }
 
@@ -293,6 +272,16 @@
       white-space: pre-wrap;
     }
 
+    .final-output {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 20px;
+      white-space: pre-wrap;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
     .small-note {
       font-size: 13px;
       color: #6b7280;
@@ -300,7 +289,6 @@
       line-height: 1.6;
     }
 
-    /* 휴대폰 화면에서 보기 좋게 바꿉니다. */
     @media (max-width: 640px) {
       .row {
         grid-template-columns: 1fr;
@@ -322,8 +310,7 @@
         width: 100%;
       }
 
-      .btn-next,
-      .btn-ai {
+      .btn-next {
         margin-left: 0;
       }
     }
@@ -332,7 +319,6 @@
 
 <body>
   <div class="container">
-    <!-- 사이트 제목 영역 -->
     <div class="header">
       <h1>📚 Reading Log Journal</h1>
       <p>
@@ -341,7 +327,6 @@
       </p>
     </div>
 
-    <!-- 진행률 표시 영역 -->
     <div class="progress-box">
       <div class="progress-text">
         <span id="stepText">Step 1 / 4</span>
@@ -352,7 +337,7 @@
       </div>
     </div>
 
-    <!-- Step 1: 기본 정보 입력 -->
+    <!-- Step 1 -->
     <section class="card step" id="step1">
       <span class="step-label">Step 1</span>
       <h2>Basic Information / 기본 정보</h2>
@@ -387,7 +372,7 @@
       </div>
     </section>
 
-    <!-- Step 2: 책 정보 입력 -->
+    <!-- Step 2 -->
     <section class="card step hidden" id="step2">
       <span class="step-label">Step 2</span>
       <h2>Book Information / 책 정보</h2>
@@ -399,7 +384,7 @@
       <label for="bookTitle">
         <span class="eng">Book Title</span> / <span class="kor">책 제목</span>
       </label>
-      <input type="text" id="bookTitle" placeholder="Example: Wonder / 예: 원더" />
+      <input type="text" id="bookTitle" placeholder="Example: Wonder / 예: Wonder" />
 
       <label for="author">
         <span class="eng">Author</span> / <span class="kor">저자</span>
@@ -409,7 +394,7 @@
       <label for="readingRange">
         <span class="eng">Pages or Chapter You Read</span> / <span class="kor">읽은 범위</span>
       </label>
-      <input type="text" id="readingRange" placeholder="Example: pp. 10–25 / Chapter 2 / 예: p.10~25, 2장" />
+      <input type="text" id="readingRange" placeholder="Example: pp. 10–25 / Chapter 2" />
 
       <div class="buttons">
         <button class="btn-prev" onclick="prevStep()">Previous / 이전으로</button>
@@ -417,7 +402,7 @@
       </div>
     </section>
 
-    <!-- Step 3: 인상 깊은 문장과 이유 입력 -->
+    <!-- Step 3 -->
     <section class="card step hidden" id="step3">
       <span class="step-label">Step 3</span>
       <h2>Impressive Sentence / 인상 깊은 문장</h2>
@@ -436,7 +421,7 @@
         <span class="eng">Why did this sentence impress you?</span><br />
         <span class="kor">이 문장이 인상 깊었던 이유는 무엇인가요?</span>
       </label>
-      <textarea id="reason" placeholder="Explain why this sentence stayed in your mind. / 왜 이 문장이 마음에 남았는지 설명해 보세요."></textarea>
+      <textarea id="reason" placeholder="Example: This sentence impressed me because it reminded me of my friend."></textarea>
 
       <div class="tip">
         💡 Try not to write only “It was good.” Explain which word, scene, or idea touched you.<br />
@@ -449,7 +434,7 @@
       </div>
     </section>
 
-    <!-- Step 4: 오늘의 감정과 연결하기 + AI 교정 -->
+    <!-- Step 4 -->
     <section class="card step hidden" id="step4">
       <span class="step-label">Step 4</span>
       <h2>Connect It to Yourself & Get Feedback / 나와 연결하고 표현 다듬기</h2>
@@ -478,21 +463,21 @@
         <span class="eng">How is this sentence connected to your feeling today?</span><br />
         <span class="kor">오늘의 기분과 이 문장은 어떻게 연결되나요?</span>
       </label>
-      <textarea id="moodConnection" placeholder="Connect the sentence to your mood, experience, or situation today. / 오늘 나의 기분이나 상황과 이 문장을 연결해 보세요."></textarea>
+      <textarea id="moodConnection" placeholder="Example: This sentence is connected to my feeling today because I also felt worried this morning."></textarea>
 
       <label for="impact">
         <span class="eng">How did this sentence affect your thoughts or feelings?</span><br />
         <span class="kor">이 문장은 나의 생각이나 마음에 어떤 영향을 주었나요?</span>
       </label>
-      <textarea id="impact" placeholder="Write about a change in your thoughts, comfort, realization, or decision. / 생각의 변화, 위로, 깨달음, 다짐 등을 적어 보세요."></textarea>
+      <textarea id="impact" placeholder="Example: This sentence made me think about how I treat my friends."></textarea>
 
       <div class="ai-box">
         🤖 <strong>AI English Teacher</strong><br />
-        Click the button below to receive simple English expression suggestions.<br />
+        Click the button below to receive English expression suggestions.<br />
         아래 버튼을 누르면 학생이 쓴 영어 표현을 더 자연스럽게 다듬은 제안문을 볼 수 있습니다.<br />
         <span class="small-note">
-          ※ This version works without an external API, so it checks common expression patterns, capitalization, punctuation, and simple grammar.<br />
-          ※ 외부 AI API 없이 작동하는 버전이라 대소문자, 문장부호, 자주 틀리는 표현, 간단한 문법을 중심으로 도와줍니다.
+          ※ This is an API-free classroom version. It corrects common grammar, punctuation, capitalization, and learner expression patterns.<br />
+          ※ 외부 AI API 없이 작동하는 수업용 버전입니다. 기본 문법, 문장부호, 대소문자, 자주 틀리는 표현을 중심으로 교정합니다.
         </span>
       </div>
 
@@ -502,13 +487,12 @@
         <button class="btn-submit" onclick="makeFinalLog()">Complete Reading Log / 완성하기</button>
       </div>
 
-      <!-- AI 교정 결과가 표시되는 영역입니다. -->
       <div id="teacherFeedback" class="hidden">
         <div class="feedback-card">
           <h3>🤖 AI English Teacher Feedback</h3>
           <p class="description">
-            Review the suggestions below. You may use the teacher's version if it matches your meaning.<br />
-            아래 제안문을 확인하고, 내 생각과 맞으면 교정된 표현을 사용해 보세요.
+            Compare your original writing with the suggested version.<br />
+            학생 원문과 AI 영어교사의 제안문을 비교해 보세요.
           </p>
 
           <div class="feedback-label">1. Impressive Sentence / 인상 깊은 문장</div>
@@ -534,7 +518,7 @@
       </div>
     </section>
 
-    <!-- 최종 결과 화면 -->
+    <!-- Result -->
     <section class="card hidden" id="resultSection">
       <span class="step-label">Completed</span>
       <h2>Completed Reading Log / 완성된 Reading Log</h2>
@@ -564,7 +548,7 @@
     // 현재 사용자가 보고 있는 단계 번호입니다.
     let currentStep = 1;
 
-    // 전체 단계 수입니다. 마지막 성찰 단계를 삭제했기 때문에 4단계입니다.
+    // 전체 단계 수입니다.
     const totalSteps = 4;
 
     // AI 교정 결과를 저장하는 객체입니다.
@@ -587,12 +571,10 @@
 
     // 다음 단계로 이동하는 함수입니다.
     function nextStep() {
-      // 현재 단계에서 필수 입력값이 비어 있으면 이동하지 않습니다.
       if (!validateStep(currentStep)) {
         return;
       }
 
-      // 마지막 단계가 아니라면 다음 단계로 이동합니다.
       if (currentStep < totalSteps) {
         document.getElementById(`step${currentStep}`).classList.add("hidden");
         currentStep++;
@@ -611,7 +593,7 @@
       }
     }
 
-    // 현재 단계에 맞게 진행률을 업데이트합니다.
+    // 진행률을 업데이트하는 함수입니다.
     function updateProgress() {
       const percent = Math.round((currentStep / totalSteps) * 100);
       document.getElementById("stepText").innerText = `Step ${currentStep} / ${totalSteps}`;
@@ -621,7 +603,6 @@
 
     // 단계별 필수 입력값을 확인하는 함수입니다.
     function validateStep(step) {
-      // Step 1에서는 학번, 이름, 날짜를 확인합니다.
       if (step === 1) {
         const studentId = document.getElementById("studentId").value.trim();
         const studentName = document.getElementById("studentName").value.trim();
@@ -633,7 +614,6 @@
         }
       }
 
-      // Step 2에서는 책 제목을 확인합니다.
       if (step === 2) {
         const bookTitle = document.getElementById("bookTitle").value.trim();
 
@@ -643,7 +623,6 @@
         }
       }
 
-      // Step 3에서는 인상 깊은 문장과 이유를 확인합니다.
       if (step === 3) {
         const impressiveSentence = document.getElementById("impressiveSentence").value.trim();
         const reason = document.getElementById("reason").value.trim();
@@ -654,7 +633,6 @@
         }
       }
 
-      // Step 4에서는 기분, 연결, 영향을 확인합니다.
       if (step === 4) {
         const mood = document.getElementById("mood").value;
         const moodConnection = document.getElementById("moodConnection").value.trim();
@@ -671,24 +649,21 @@
 
     // AI 영어교사 버튼을 눌렀을 때 실행되는 함수입니다.
     function checkWithTeacher() {
-      // Step 4의 필수 항목이 비어 있으면 교정을 진행하지 않습니다.
       if (!validateStep(4)) {
         return;
       }
 
-      // 학생이 입력한 문장을 가져옵니다.
       const impressiveSentence = document.getElementById("impressiveSentence").value.trim();
       const reason = document.getElementById("reason").value.trim();
       const moodConnection = document.getElementById("moodConnection").value.trim();
       const impact = document.getElementById("impact").value.trim();
 
-      // 각 항목에 대해 교정 제안문을 만듭니다.
-      teacherSuggestions.sentence = polishEnglish(impressiveSentence, true);
-      teacherSuggestions.reason = polishEnglish(reason, false);
-      teacherSuggestions.moodConnection = polishEnglish(moodConnection, false);
-      teacherSuggestions.impact = polishEnglish(impact, false);
+      // 각 항목의 성격에 맞게 교정합니다.
+      teacherSuggestions.sentence = polishEnglish(impressiveSentence, "quote");
+      teacherSuggestions.reason = polishEnglish(reason, "reason");
+      teacherSuggestions.moodConnection = polishEnglish(moodConnection, "connection");
+      teacherSuggestions.impact = polishEnglish(impact, "impact");
 
-      // 원문과 제안문을 화면에 표시합니다.
       document.getElementById("originalSentence").innerText = impressiveSentence;
       document.getElementById("suggestedSentence").innerText = teacherSuggestions.sentence;
 
@@ -701,31 +676,56 @@
       document.getElementById("originalImpact").innerText = impact;
       document.getElementById("suggestedImpact").innerText = teacherSuggestions.impact;
 
-      // 숨겨져 있던 피드백 영역을 보여줍니다.
       document.getElementById("teacherFeedback").classList.remove("hidden");
 
       alert("AI English Teacher feedback is ready. / AI 영어교사의 표현 제안이 준비되었습니다.");
     }
 
-    // 영어 문장을 간단히 다듬어 주는 함수입니다.
-    // 외부 API 없이 브라우저 안에서만 작동하는 규칙 기반 교정 도우미입니다.
-    function polishEnglish(text, isQuotedSentence) {
+    // 영어 표현을 다듬는 핵심 함수입니다.
+    function polishEnglish(text, type) {
       if (!text) {
         return "";
       }
 
-      let polished = text;
+      let original = text.trim();
+      let polished = text.trim();
 
-      // 줄바꿈 주변의 불필요한 공백을 정리합니다.
-      polished = polished.replace(/[ \t]+/g, " ");
-      polished = polished.replace(/\n\s+/g, "\n");
-      polished = polished.trim();
+      polished = normalizeSpaces(polished);
+      polished = fixCommonSpellingAndContractions(polished);
+      polished = fixKoreanLearnerPatterns(polished);
+      polished = fixSubjectVerbAgreement(polished);
+      polished = fixArticleAndPrepositionPatterns(polished);
+      polished = capitalizeSentences(polished);
+      polished = addFinalPunctuation(polished);
+      polished = improveByContext(polished, type);
 
-      // 자주 틀리는 축약형과 기본 표현을 교정합니다.
+      // 원문과 거의 같을 때도 학생이 볼 수 있는 교사 제안을 덧붙입니다.
+      if (polished.trim() === original.trim()) {
+        polished = addTeacherStyleSuggestion(polished, type);
+      }
+
+      return polished;
+    }
+
+    // 불필요한 공백과 문장부호 주변을 정리하는 함수입니다.
+    function normalizeSpaces(text) {
+      return text
+        .replace(/[ \t]+/g, " ")
+        .replace(/\s+([,.!?])/g, "$1")
+        .replace(/([,.!?])([A-Za-z])/g, "$1 $2")
+        .trim();
+    }
+
+    // 자주 틀리는 철자와 축약형을 고치는 함수입니다.
+    function fixCommonSpellingAndContractions(text) {
       const replacements = [
         [/\bi\b/g, "I"],
-        [/\bim\b/gi, "I'm"],
-        [/\bi'm\b/g, "I'm"],
+        [/\bu\b/gi, "you"],
+        [/\bur\b/gi, "your"],
+        [/\br\b/gi, "are"],
+        [/\bcuz\b/gi, "because"],
+        [/\bcoz\b/gi, "because"],
+        [/\bbecuz\b/gi, "because"],
         [/\bdont\b/gi, "don't"],
         [/\bdoesnt\b/gi, "doesn't"],
         [/\bdidnt\b/gi, "didn't"],
@@ -733,56 +733,164 @@
         [/\bcannot\b/gi, "can't"],
         [/\bwont\b/gi, "won't"],
         [/\bisnt\b/gi, "isn't"],
-        [/\baren't\b/g, "aren't"],
-        [/\baren t\b/gi, "aren't"],
         [/\bwasnt\b/gi, "wasn't"],
         [/\bwerent\b/gi, "weren't"],
         [/\bthats\b/gi, "that's"],
         [/\bits\b/gi, "it's"],
+        [/\bim\b/gi, "I'm"],
+        [/\bi'm\b/g, "I'm"],
+        [/\balot\b/gi, "a lot"],
+        [/\ba lots of\b/gi, "a lot of"],
+        [/\bpeoples\b/gi, "people"],
+        [/\bchildrens\b/gi, "children"],
+        [/\bwanna\b/gi, "want to"],
+        [/\bgonna\b/gi, "going to"]
+      ];
+
+      replacements.forEach(function (item) {
+        text = text.replace(item[0], item[1]);
+      });
+
+      return text;
+    }
+
+    // 한국 학생들이 자주 쓰는 어색한 영어 표현을 고치는 함수입니다.
+    function fixKoreanLearnerPatterns(text) {
+      const replacements = [
         [/\bI am agree\b/gi, "I agree"],
+        [/\bI agree this sentence\b/gi, "I agree with this sentence"],
+        [/\bI agree this idea\b/gi, "I agree with this idea"],
+        [/\bI very like\b/gi, "I really like"],
+        [/\bI like very much\b/gi, "I like it very much"],
         [/\bI was impress\b/gi, "I was impressed"],
         [/\bI am impress\b/gi, "I am impressed"],
+        [/\bI feel impress\b/gi, "I feel impressed"],
         [/\bvery impress\b/gi, "very impressive"],
         [/\bmore better\b/gi, "better"],
+        [/\bmore easier\b/gi, "easier"],
+        [/\bmore happier\b/gi, "happier"],
+
         [/\bIt make me\b/gi, "It makes me"],
+        [/\bIt makes me to\b/gi, "It makes me"],
         [/\bThis sentence make me\b/gi, "This sentence makes me"],
-        [/\bThis sentence give me\b/gi, "This sentence gives me"],
+        [/\bThis sentence makes me to\b/gi, "This sentence makes me"],
+        [/\bThe sentence make me\b/gi, "The sentence makes me"],
+        [/\bThis quote make me\b/gi, "This quote makes me"],
         [/\bIt give me\b/gi, "It gives me"],
+        [/\bThis sentence give me\b/gi, "This sentence gives me"],
+        [/\bThe sentence give me\b/gi, "The sentence gives me"],
+        [/\bIt help me\b/gi, "It helps me"],
+        [/\bThis sentence help me\b/gi, "This sentence helps me"],
+        [/\bIt remind me\b/gi, "It reminds me"],
+        [/\bThis sentence remind me\b/gi, "This sentence reminds me"],
+
         [/\bI feel comfort\b/gi, "I feel comforted"],
-        [/\bI feel happy because this sentence\b/gi, "I feel happy because this sentence"],
+        [/\bI feel sad because of this sentence\b/gi, "This sentence makes me feel sad"],
         [/\bIn my think\b/gi, "I think"],
         [/\bmy think\b/gi, "my thought"],
         [/\bI thinked\b/gi, "I thought"],
-        [/\bpeoples\b/gi, "people"],
-        [/\ba lots of\b/gi, "a lot of"],
-        [/\bfor me, this sentence is meaning\b/gi, "To me, this sentence means"],
-        [/\bThis sentence is meaning\b/gi, "This sentence means"]
+        [/\bI feeled\b/gi, "I felt"],
+        [/\bI choosed\b/gi, "I chose"],
+        [/\bI readed\b/gi, "I read"],
+        [/\bI founded\b/gi, "I found"],
+        [/\bI learned me\b/gi, "I learned"],
+        [/\bI knowed\b/gi, "I knew"],
+
+        [/\bIt was make me\b/gi, "It made me"],
+        [/\bIt made me to\b/gi, "It made me"],
+        [/\bThis made me to\b/gi, "This made me"],
+
+        [/\bThis sentence is meaning\b/gi, "This sentence means"],
+        [/\bThis quote is meaning\b/gi, "This quote means"],
+        [/\bFor me, this sentence is meaning\b/gi, "To me, this sentence means"],
+        [/\bThis sentence is connect to\b/gi, "This sentence is connected to"],
+        [/\bThis sentence connected with\b/gi, "This sentence is connected to"],
+        [/\bIt is relate to\b/gi, "It is related to"],
+        [/\bIt related with\b/gi, "It is related to"],
+
+        [/\bI can felt\b/gi, "I can feel"],
+        [/\bI can thought\b/gi, "I can think"],
+        [/\bI could felt\b/gi, "I could feel"],
+        [/\bI should to\b/gi, "I should"],
+        [/\bI must to\b/gi, "I must"],
+        [/\bI can to\b/gi, "I can"],
+        [/\bI want know\b/gi, "I want to know"],
+        [/\bI want become\b/gi, "I want to become"],
+
+        [/\blisten music\b/gi, "listen to music"],
+        [/\bgo to home\b/gi, "go home"],
+        [/\bon today\b/gi, "today"],
+        [/\bin today\b/gi, "today"],
+        [/\btoday mood\b/gi, "today's mood"],
+        [/\bmy today feeling\b/gi, "my feeling today"],
+        [/\bmy feel\b/gi, "my feeling"],
+        [/\bfriend relationship\b/gi, "friendship"],
+
+        [/\bI don't know what should I do\b/gi, "I don't know what I should do"],
+        [/\bI don't know how can I\b/gi, "I don't know how I can"],
+        [/\bI wondered why did\b/gi, "I wondered why"],
+        [/\bI wondered how did\b/gi, "I wondered how"]
       ];
 
-      // 위에 정의한 표현들을 차례대로 적용합니다.
       replacements.forEach(function (item) {
-        polished = polished.replace(item[0], item[1]);
+        text = text.replace(item[0], item[1]);
       });
 
-      // 문장 시작 부분의 첫 글자를 대문자로 바꿉니다.
-      polished = capitalizeSentences(polished);
+      return text;
+    }
 
-      // 문장 끝에 마침표, 물음표, 느낌표가 없으면 마침표를 붙입니다.
-      polished = addFinalPunctuation(polished);
+    // 주어-동사 일치를 보정하는 함수입니다.
+    function fixSubjectVerbAgreement(text) {
+      const replacements = [
+        [/\bI has\b/gi, "I have"],
+        [/\bI is\b/gi, "I am"],
+        [/\bI are\b/gi, "I am"],
+        [/\bI were\b/gi, "I was"],
+        [/\bHe have\b/gi, "He has"],
+        [/\bShe have\b/gi, "She has"],
+        [/\bIt have\b/gi, "It has"],
+        [/\bHe are\b/gi, "He is"],
+        [/\bShe are\b/gi, "She is"],
+        [/\bIt are\b/gi, "It is"],
+        [/\bPeople is\b/gi, "People are"],
+        [/\bFriends is\b/gi, "Friends are"],
+        [/\bThey is\b/gi, "They are"],
+        [/\bWe is\b/gi, "We are"],
+        [/\bThere is many\b/gi, "There are many"],
+        [/\bThere is a lot of people\b/gi, "There are a lot of people"]
+      ];
 
-      // 직접 인용문일 가능성이 있는 항목에는 안내 문구를 덧붙입니다.
-      if (isQuotedSentence) {
-        polished =
-          polished +
-          "\n\nTeacher's note: If this sentence is copied directly from the book, keep the original wording exactly as it appears in the book.";
-      }
+      replacements.forEach(function (item) {
+        text = text.replace(item[0], item[1]);
+      });
 
-      return polished;
+      return text;
+    }
+
+    // 관사와 전치사 관련 자주 보이는 오류를 보정하는 함수입니다.
+    function fixArticleAndPrepositionPatterns(text) {
+      const replacements = [
+        [/\bthink about friend\b/gi, "think about my friend"],
+        [/\bthink about family\b/gi, "think about my family"],
+        [/\breminds me my friend\b/gi, "reminds me of my friend"],
+        [/\breminds me my family\b/gi, "reminds me of my family"],
+        [/\breminds me my experience\b/gi, "reminds me of my experience"],
+        [/\bconnected my feeling\b/gi, "connected to my feeling"],
+        [/\bconnected to today feeling\b/gi, "connected to my feeling today"],
+        [/\baffect to me\b/gi, "affect me"],
+        [/\bin my life experience\b/gi, "in my life"],
+        [/\bby this sentence\b/gi, "because of this sentence"]
+      ];
+
+      replacements.forEach(function (item) {
+        text = text.replace(item[0], item[1]);
+      });
+
+      return text;
     }
 
     // 각 문장의 첫 글자를 대문자로 바꾸는 함수입니다.
     function capitalizeSentences(text) {
-      // 줄바꿈을 유지하기 위해 문단별로 처리합니다.
       const paragraphs = text.split("\n");
 
       const fixedParagraphs = paragraphs.map(function (paragraph) {
@@ -792,13 +900,13 @@
           return result;
         }
 
-        // 전체 문단의 첫 글자를 대문자로 만듭니다.
         result = result.charAt(0).toUpperCase() + result.slice(1);
 
-        // 마침표, 물음표, 느낌표 뒤에 오는 첫 글자를 대문자로 만듭니다.
         result = result.replace(/([.!?]\s+)([a-z])/g, function (match, punctuation, letter) {
           return punctuation + letter.toUpperCase();
         });
+
+        result = result.replace(/(["“'])i\b/g, "$1I");
 
         return result;
       });
@@ -819,7 +927,6 @@
 
         const lastChar = result.charAt(result.length - 1);
 
-        // 문장 끝이 마침표, 물음표, 느낌표, 따옴표 등으로 끝나지 않으면 마침표를 추가합니다.
         if (![".", "?", "!", "\"", "'", "”", "’"].includes(lastChar)) {
           result += ".";
         }
@@ -830,19 +937,73 @@
       return fixedParagraphs.join("\n");
     }
 
+    // 항목별 맥락에 맞게 문장을 더 자연스럽게 보정하는 함수입니다.
+    function improveByContext(text, type) {
+      let result = text.trim();
+
+      if (type === "quote") {
+        return result +
+          "\n\nTeacher's note: If this sentence is copied directly from the book, keep the original wording exactly as it appears in the book.";
+      }
+
+      if (type === "reason") {
+        result = result.replace(/^Because\s+/i, "This sentence impressed me because ");
+        result = result.replace(/^It is impressive because\s+/i, "This sentence impressed me because ");
+        result = result.replace(/^Good because\s+/i, "This sentence impressed me because ");
+      }
+
+      if (type === "connection") {
+        result = result.replace(/^Because\s+/i, "This sentence is connected to my feeling today because ");
+        result = result.replace(/^It connect/i, "It is connected");
+        result = result.replace(/^It is about my feeling/i, "It is connected to my feeling");
+      }
+
+      if (type === "impact") {
+        result = result.replace(/^Because\s+/i, "This sentence affected me because ");
+        result = result.replace(/^It changed my think/i, "It changed my thinking");
+        result = result.replace(/^It gave me think/i, "It made me think");
+      }
+
+      result = capitalizeSentences(result);
+      result = addFinalPunctuation(result);
+
+      return result;
+    }
+
+    // 원문과 거의 차이가 없을 때, 교사식 제안을 덧붙이는 함수입니다.
+    function addTeacherStyleSuggestion(text, type) {
+      let suggestion = text;
+
+      if (type === "reason") {
+        suggestion += "\n\nTeacher's suggestion: You can make your reason clearer by adding which word, scene, or idea impressed you and why it stayed in your mind.";
+      }
+
+      if (type === "connection") {
+        suggestion += "\n\nTeacher's suggestion: You can make this stronger by explaining your feeling today and connecting it to a specific word, scene, or idea from the sentence.";
+      }
+
+      if (type === "impact") {
+        suggestion += "\n\nTeacher's suggestion: You can make this more natural by writing how the sentence changed your thought, comforted you, or helped you make a small decision.";
+      }
+
+      if (type === "quote") {
+        suggestion += "\n\nTeacher's note: If this is a direct quote from the book, keep the original sentence exactly as written.";
+      }
+
+      return suggestion;
+    }
+
     // 최종 Reading Log를 만드는 함수입니다.
     function makeFinalLog() {
-      // Step 4의 필수 항목이 비어 있으면 결과를 만들지 않습니다.
       if (!validateStep(4)) {
         return;
       }
 
-      // AI 교정을 아직 하지 않았다면 자동으로 한 번 실행합니다.
+      // AI 교정을 하지 않고 완성 버튼을 눌렀을 때 자동으로 교정합니다.
       if (!teacherSuggestions.reason || !teacherSuggestions.moodConnection || !teacherSuggestions.impact) {
         checkWithTeacher();
       }
 
-      // 사용자가 입력한 값을 가져옵니다.
       const studentId = document.getElementById("studentId").value.trim();
       const studentName = document.getElementById("studentName").value.trim();
       const date = document.getElementById("date").value;
@@ -855,7 +1016,6 @@
       const moodConnection = document.getElementById("moodConnection").value.trim();
       const impact = document.getElementById("impact").value.trim();
 
-      // 최종 제출용 텍스트를 만듭니다.
       const finalLog =
 `[Reading Log Journal with AI English Teacher]
 
@@ -902,12 +1062,9 @@ ${impact}
 [AI English Teacher's Suggested Version / AI 영어교사 제안문]
 ${teacherSuggestions.impact}`;
 
-      // 작성 단계 화면을 숨기고 최종 결과 화면을 보여 줍니다.
       document.getElementById("step4").classList.add("hidden");
       document.querySelector(".progress-box").classList.add("hidden");
       document.getElementById("resultSection").classList.remove("hidden");
-
-      // 최종 결과를 화면에 출력합니다.
       document.getElementById("finalOutput").innerText = finalLog;
     }
 
@@ -926,20 +1083,13 @@ ${teacherSuggestions.impact}`;
       const studentId = document.getElementById("studentId").value.trim();
       const studentName = document.getElementById("studentName").value.trim();
 
-      // 텍스트 파일을 만들기 위한 Blob 객체입니다.
       const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
 
-      // 다운로드 링크를 임시로 생성합니다.
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
-
-      // 다운로드 파일명을 학번과 이름이 포함되도록 설정합니다.
       link.download = `ReadingLog_${studentId}_${studentName}.txt`;
-
-      // 링크를 클릭한 것처럼 실행하여 파일을 다운로드합니다.
       link.click();
 
-      // 사용이 끝난 임시 URL을 정리합니다.
       URL.revokeObjectURL(link.href);
     }
 
